@@ -1,0 +1,11 @@
+{
+  "name": "recipe_nodejs_express",
+  "version": "1.0.0",
+  "description": "making a CRUD website about my cooking recipes",
+  "main": "index.js",
+  "author": "HAN Kihoon",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
