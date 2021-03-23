@@ -1,8 +1,8 @@
 // Global
 const HOME = "/";
 const SIGNUP = "/signup";
-const SIGNIN = "/login";
-const SIGNOUT = "/logout";
+const SIGNIN = "/signin";
+const SIGNOUT = "/signout";
 const SEARCH = "/search";
 
 // Users
