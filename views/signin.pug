@@ -1,4 +1,8 @@
 extends layouts/main.pug
 
 block content 
-    p Hello!
+    .form__container
+        form(action=routes.signin, method="post")
+            input(type="email", name="email", placeholder="Email")
+            input(type="password", name="password", placeholder="Password")
+            input(type="submit", value="Sign In")

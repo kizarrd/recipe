@@ -32,7 +32,7 @@ const routes = {
     upload: UPLOAD,
     recipeDetail: RECIPE_DETAIL,
     editRecipe: EDIT_RECIPE,
-    delteRecipe: DELETE_RECIPE
+    deleteRecipe: DELETE_RECIPE
 }
 
 export default routes;

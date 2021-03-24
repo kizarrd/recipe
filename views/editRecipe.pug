@@ -1,4 +1,10 @@
 extends layouts/main.pug
 
 block content 
-    p Hello!
+        .form-container
+        form(action=routes.recipe+routes.editRecipe, method="post")
+            input(type="text", placeholder="Title", name="title")
+            textarea(name="ingredients", placeholder="Ingredients")
+            textarea(name="recipe", placeholder="Recipe")
+            input(type="submit", value="Update Recipe")
+        a.form-container__link.form-container__link--delete(href=routes.recipe+routes.deleteRecipe) Delete Recipe 

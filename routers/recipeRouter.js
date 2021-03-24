@@ -6,10 +6,10 @@ const recipeRouter = express.Router();
 
 
 recipeRouter.get(routes.home, home);
-recipeRouter.get(routes.search, search);
+// recipeRouter.get(routes.search, search);
 recipeRouter.get(routes.upload, upload);
 recipeRouter.get(routes.recipeDetail, recipeDetail);
 recipeRouter.get(routes.editRecipe, editRecipe);
-recipeRouter.get(routes.delteRecipe, deleteRecipe);
+recipeRouter.get(routes.deleteRecipe, deleteRecipe);
 
 export default recipeRouter;
