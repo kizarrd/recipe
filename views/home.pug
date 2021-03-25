@@ -1,4 +1,11 @@
-extends layouts/main.pug
+extends layouts/main
+include mixins/recipeBlock
 
 block content 
-    p Hello!
+    .recipes
+        each recipe in recipes 
+            +recipeBlock({
+                imageFile: recipe.imageFile,
+                title: recipe.title,
+                name: recipe.creator.name
+            })

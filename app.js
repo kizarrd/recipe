@@ -16,6 +16,10 @@ const PORT = 3000;
 
 //middlewares
 app.use(helmet());
+app.use(function(req, res, next) {
+    res.setHeader("Content-Security-Policy", "script-src 'self' https://archive.org");
+    return next();
+    });
 app.set('view engine', 'pug');
 app.use(cookieParser());
 app.use(bodyParser.json());
