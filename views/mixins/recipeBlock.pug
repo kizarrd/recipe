@@ -1,5 +1,6 @@
 mixin recipeBlock( recipe = {} )
     .recipeBlock 
-        img.recipeBlock__thumbnail(src=recipe.imageFile)
-        h2.recipeBlock__title=recipe.title 
-        h5.recipeBlock__creator=recipe.name
+        a(href=routes.recipeDetail(recipe.id))
+            img.recipeBlock__thumbnail(src=recipe.imageFile)
+            h2.recipeBlock__title=recipe.title 
+            h5.recipeBlock__creator=recipe.name

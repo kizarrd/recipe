@@ -5,6 +5,7 @@ block content
     .recipes
         each recipe in recipes 
             +recipeBlock({
+                id: recipe.id,
                 imageFile: recipe.imageFile,
                 title: recipe.title,
                 name: recipe.creator.name

@@ -26,11 +26,23 @@ const routes = {
     search: SEARCH,
     user: USER,
     recipe: RECIPE,
-    userDetail: USER_DETAIL,
+    userDetail: (id) => {
+        if(id){
+            return `/user/${id}`;
+        }else{
+            return USER_DETAIL;
+        }
+    },
     editProfile: EDIT_PROFILE,
     changePassword: CHANGE_PASSWORD,
     upload: UPLOAD,
-    recipeDetail: RECIPE_DETAIL,
+    recipeDetail: (id) => {
+        if(id){
+            return `/recipe/${id}`;
+        }else{
+            return RECIPE_DETAIL;
+        }
+    },
     editRecipe: EDIT_RECIPE,
     deleteRecipe: DELETE_RECIPE
 }
