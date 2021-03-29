@@ -1,54 +1,20 @@
-export const recipes = [
-    {
-        id: 343242,
-        title: "Okinawan Taco Rice",
-        ingredients: "Taco Spice",
-        recipe: "cook it",
-        views: 24,
-        imageFile: "Taco-Rice-w722.jpg",
-        creator: {
-            id: "123145123",
-            name: "Kihoon",
-            email: "jacob2572502@gmail.com"
-        }
-    },
-    {
-        id: 123124,
-        title: "Soondooboo Jjigae",
-        ingredients: "Soondooboo",
-        recipe: "cook it",
-        views: 24,
-        imageFile: "Taco-Rice-w722.jpg",
-        creator: {
-            id: "123145123",
-            name: "Kihoon",
-            email: "jacob2572502@gmail.com"
-        }
-    },
-    {
-        id: 364565,
-        title: "Shogayaki",
-        ingredients: "pork",
-        recipe: "cook it",
-        views: 24,
-        imageFile: "Taco-Rice-w722.jpg",
-        creator: {
-            id: "123145123",
-            name: "Kihoon",
-            email: "jacob2572502@gmail.com"
-        }
-    },
-    {
-        id: 2364785,
-        title: "Doenjang Jjigae",
-        ingredients: "beef",
-        recipe: "cook it",
-        views: 24,
-        imageFile: "Taco-Rice-w722.jpg",
-        creator: {
-            id: "123145123",
-            name: "Kihoon",
-            email: "jacob2572502@gmail.com"
-        }
-    }
-];
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+dotenv.config();
+
+mongoose.connect(
+  process.env.MONGO_URL,
+  {
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    // useUnifiedTopology: true 
+  }
+);
+
+const db = mongoose.connection;
+
+const handleOpen = () => console.log("✅  Connected to DB");
+const handleError = error => console.log(`❌ Error on DB Connection:${error}`);
+
+db.once("open", handleOpen);
+db.on("error", handleError);

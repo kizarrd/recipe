@@ -1,11 +1,25 @@
-import { recipes } from "../db";
 import routes from "../routes";
+import Recipe from "../models/Recipe";
 
-export const home = (req, res) => {
-    res.render("home", { pageTitle: "Home", recipes } );
+export const home = async (req, res) => {
+    try{
+        const recipes = await Recipe.find({});
+        res.render("home", { pageTitle: "Home", recipes } );
+    }catch(error){
+        console.log(error);
+        res.render("home", { pageTitle: "Home", recipes: [] } );
+    }
 };
 
-
+export const search = async (req, res) => {
+    try{
+        const recipes = await Recipe.find({});
+        res.render("search", { searchingBy: req.query.term, recipes });
+    }catch(error){
+        console.log(error);
+        res.render("search", { searchingBy: req.query.term, recipes: [] });
+    }
+};
 
 export const getUpload = (req, res) =>{
     res.render("upload", { pageTitle: "Upload" });
@@ -20,6 +34,7 @@ export const postUpload = (req, res) => {
             recipe
         }
     } = req;
+    console.log(file, title, ingredients, recipe);
     res.redirect(routes.recipeDetail(343242));
 };
 

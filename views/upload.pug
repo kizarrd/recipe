@@ -4,7 +4,7 @@ block content
     .form-container
         form(action=`/recipe${routes.upload}`, method="post")
             label(for="file") Image File
-            input(type="file", id="file", name="file", required = true)
+            input(type="file", id="file", name="file", required = true, accept="image/x-png,image/gif,image/jpeg")
             input(type="text", placeholder="Title", name="title", required = true)
             textarea(name="ingredients", placeholder="Ingredients", required = true)
             textarea(name="recipe", placeholder="Recipe", required = true)

@@ -1,9 +1,9 @@
-import { recipes } from "../db";
+import "../db";
 import routes from "../routes";
 
-export const search = (req, res) => {
-    res.render("search", { searchingBy: req.query.term, recipes });
-};
+// export const search = (req, res) => {
+//     res.render("search", { searchingBy: req.query.term, recipes });
+// };
 export const getSignup = (req, res) => {
     res.render("signup", { pageTitle: "Sign Up"});
 };
