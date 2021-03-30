@@ -1,4 +1,7 @@
+import multer from "multer";
 import routes from "./routes";
+
+const multerImage = multer({ dest: "uploads/images/" });
 
 export const localsMiddleWare = (req, res, next) => {
     res.locals.siteName = "RECIPE";
@@ -9,3 +12,5 @@ export const localsMiddleWare = (req, res, next) => {
     };
     next();
 };
+
+export const uploadImage = multerImage.single("imageFile");

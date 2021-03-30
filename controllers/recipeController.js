@@ -25,20 +25,22 @@ export const getUpload = (req, res) =>{
     res.render("upload", { pageTitle: "Upload" });
 };
 
-export const postUpload = (req, res) => {
+export const postUpload = async (req, res) => {
     const{
-        body: {
-            file,
-            title,
-            ingredients,
-            recipe
-        }
+        body: { title, ingredients, recipe },
+        file: { path }
     } = req;
-    console.log(file, title, ingredients, recipe);
-    res.redirect(routes.recipeDetail(343242));
+
+    const newRecipe = await Recipe.create({
+        fileUrl: path,
+        title,
+        ingredients,
+        recipe
+    })
+
+    console.log(newRecipe)
+    res.redirect(routes.recipeDetail(newRecipe.id));
 };
-
-
 
 
 export const recipeDetail = (req, res) => {
