@@ -43,8 +43,57 @@ export const postUpload = async (req, res) => {
 };
 
 
-export const recipeDetail = (req, res) => {
-    res.render("recipeDetail", { pageTitle: "Recipe Detail" });
+export const recipeDetail = async (req, res) => {
+    const {
+        params: {id}
+    } = req;
+
+    try{
+        const recipe = await Recipe.findById(id);
+        console.log(recipe);
+        res.render("recipeDetail", { pageTitle: recipe.title , recipe });
+    }catch(error){
+        console.log(error);
+        res.redirect(routes.home);
+    }
 }
-export const editRecipe = (req, res) => res.render("editRecipe");
-export const deleteRecipe = (req, res) => res.render("deleteRecipe");
+export const getEditRecipe = async (req, res) => {
+    const {
+        params: {id}
+    } = req;
+
+    try{
+        const recipe = await Recipe.findById(id);
+        res.render("editRecipe", { pageTitle: `Edit ${recipe.title}`, recipe });
+    }catch(error){
+        res.redirect(routes.home);
+    }
+
+};
+
+export const postEditRecipe = async (req, res) => {
+    const {
+        params: {id},
+        body: {title, ingredients, recipe}
+    } = req;
+
+    try{
+        await Recipe.findOneAndUpdate({ _id: id }, { title, ingredients, recipe } );
+        res.redirect(routes.recipeDetail(id));
+    }catch(error){
+        res.redirect(routes.home);
+    }
+
+};
+
+export const deleteRecipe = async (req, res) => {
+    const {
+        params: {id}
+    } = req;
+
+    try{
+        await Recipe.findOneAndRemove({_id: id});
+    }catch(error){
+    }
+    res.redirect(routes.home);
+};

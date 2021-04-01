@@ -1,4 +1,11 @@
 extends layouts/main.pug
 
 block content 
-    p Recipe Detail
+    .recipe__title
+        h2=recipe.title
+        a(href=routes.editRecipe(recipe.id)) Edit Recipe
+    .recipe__image 
+        img(src=`/${recipe.fileUrl}`)
+    .recipe__contents
+        h4.recipe__contents-ingredients=recipe.ingredients 
+        h4.recipe__contents-recipe=recipe.recipe

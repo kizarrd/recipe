@@ -2,9 +2,9 @@ extends layouts/main.pug
 
 block content 
         .form-container
-        form(action=routes.recipe+routes.editRecipe, method="post")
-            input(type="text", placeholder="Title", name="title")
-            textarea(name="ingredients", placeholder="Ingredients")
-            textarea(name="recipe", placeholder="Recipe")
+        form(action=routes.editRecipe(recipe.id), method="post")
+            input(type="text", placeholder="Title", name="title", value=recipe.title)
+            textarea(name="ingredients", placeholder="Ingredients")=recipe.ingredients
+            textarea(name="recipe", placeholder="Recipe")=recipe.recipe
             input(type="submit", value="Update Recipe")
-        a.form-container__link.form-container__link--delete(href=routes.recipe+routes.deleteRecipe) Delete Recipe 
+        a.form-container__link.form-container__link--delete(href=routes.deleteRecipe(recipe.id)) Delete Recipe 

@@ -43,8 +43,20 @@ const routes = {
             return RECIPE_DETAIL;
         }
     },
-    editRecipe: EDIT_RECIPE,
-    deleteRecipe: DELETE_RECIPE
-}
+    editRecipe: (id) => {
+        if(id){
+            return `/recipe/${id}/edit`
+        }else{
+            return EDIT_RECIPE;
+        }
+    },
+    deleteRecipe: (id) => {
+        if(id){
+            return `/recipe/${id}/delete`;
+        }else{
+            return DELETE_RECIPE;
+        }
+    }
+};
 
 export default routes;

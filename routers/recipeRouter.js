@@ -1,5 +1,5 @@
 import express from "express";
-import { deleteRecipe, editRecipe, home, recipeDetail, getUpload, postUpload } from "../controllers/recipeController";
+import { deleteRecipe, home, recipeDetail, getUpload, postUpload, getEditRecipe, postEditRecipe } from "../controllers/recipeController";
 import { uploadImage } from "../middlewares";
 import routes from "../routes";
 
@@ -12,7 +12,10 @@ recipeRouter.get(routes.upload, getUpload);
 recipeRouter.post(routes.upload, uploadImage, postUpload);
 
 recipeRouter.get(routes.recipeDetail(), recipeDetail);
-recipeRouter.get(routes.editRecipe, editRecipe);
-recipeRouter.get(routes.deleteRecipe, deleteRecipe);
+
+recipeRouter.get(routes.editRecipe(), getEditRecipe);
+recipeRouter.post(routes.editRecipe(), postEditRecipe);
+
+recipeRouter.get(routes.deleteRecipe(), deleteRecipe);
 
 export default recipeRouter;
