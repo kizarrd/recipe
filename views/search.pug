@@ -5,9 +5,11 @@ block content
     .search__header
         h3 Showing results for "#{searchingBy}"
     .search__recipes
+        if recipes.length === 0
+            h5 No Recipes Found
         each recipe in recipes 
             +recipeBlock({
-                imageFile: recipe.imageFile,
+                imageFile: recipe.fileUrl,
                 title: recipe.title,
-                name: recipe.creator.name
+                id: recipe.id
             })

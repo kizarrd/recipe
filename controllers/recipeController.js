@@ -3,7 +3,7 @@ import Recipe from "../models/Recipe";
 
 export const home = async (req, res) => {
     try{
-        const recipes = await Recipe.find({});
+        const recipes = await Recipe.find({}).sort({_id: -1});
         res.render("home", { pageTitle: "Home", recipes } );
     }catch(error){
         console.log(error);
@@ -12,13 +12,31 @@ export const home = async (req, res) => {
 };
 
 export const search = async (req, res) => {
+
+    const {
+        query: { term: searchingBy }
+    }=req;
+
+
+    let recipes = [];
+
     try{
-        const recipes = await Recipe.find({});
-        res.render("search", { searchingBy: req.query.term, recipes });
+        recipes = await Recipe.find({ title: { $regex: searchingBy, $options: "i" } })
     }catch(error){
         console.log(error);
-        res.render("search", { searchingBy: req.query.term, recipes: [] });
     }
+    res.render("search", { pageTitle: "Search", searchingBy, recipes });
+
+
+
+
+    // try{
+    //     const recipes = await Recipe.find({});
+    //     res.render("search", { searchingBy: req.query.term, recipes });
+    // }catch(error){
+    //     console.log(error);
+    //     res.render("search", { searchingBy: req.query.term, recipes: [] });
+    // }
 };
 
 export const getUpload = (req, res) =>{
