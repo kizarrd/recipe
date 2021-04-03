@@ -1,7 +1,9 @@
 import express from "express";
 import { home, search } from "../controllers/recipeController";
-import { getSignin, postSignin, signout, getSignup, postSignup } from "../controllers/globalController";
+import { getSignin, postSignin, signout, getSignup, postSignup, kakaoSignin, postKakaoSignin } from "../controllers/globalController";
 import routes from "../routes";
+import passport from "passport";
+import { onlyPrivate, onlyPublic } from "../middlewares";
 
 const globalRouter = express.Router();
 
@@ -9,13 +11,19 @@ const globalRouter = express.Router();
 globalRouter.get(routes.home, home);
 globalRouter.get(routes.search, search);
 
-globalRouter.get(routes.signup, getSignup);
-globalRouter.post(routes.signup, postSignup);
+globalRouter.get(routes.signup, onlyPublic, getSignup);
+globalRouter.post(routes.signup, onlyPublic, postSignup, postSignin);
 
-globalRouter.get(routes.signin, getSignin);
-globalRouter.post(routes.signin, postSignin);
+globalRouter.get(routes.signin, onlyPublic, getSignin);
+globalRouter.post(routes.signin, onlyPublic, postSignin);
 
-globalRouter.get(routes.signout, signout);
+globalRouter.get(routes.signout, onlyPrivate, signout);
 
+globalRouter.get(routes.kakao, kakaoSignin);
+globalRouter.get(
+    routes.kakaoCallback, 
+    passport.authenticate('kakao', {failureRedirect: '#!/login',}),
+    postKakaoSignin
+);
 
 export default globalRouter;

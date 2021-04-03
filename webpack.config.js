@@ -7,10 +7,18 @@ const ENTRY_FILE = path.resolve(__dirname, "assets", "js", "main.js");
 const OUTPUT_DIR = path.join(__dirname, "static");
 
 const config = {
-    entry: ENTRY_FILE,
+    entry: ["@babel/polyfill", ENTRY_FILE],
     mode: MODE,
     module: {
         rules: [
+            {
+                test:  /\.(js)$/,
+                use: [
+                    {
+                        loader: "babel-loader"
+                    }
+                ]
+            },
             {
                 test: /\.(sa|sc|c)ss$/,
                 use: [
@@ -20,13 +28,13 @@ const config = {
                     'css-loader',
                     {
                         loader: 'postcss-loader',
-                        options: {
-                            postcssOptions: {
-                                plugins:[
-                                    ['autoprefixer', { browsers: "cover 99.5%" }, ]
-                                ],
-                            },
-                        },
+                        // options: {
+                        //     postcssOptions: {
+                        //         plugins:[
+                        //             ['autoprefixer', { browsers: "cover 99.5%" }, ]
+                        //         ],
+                        //     },
+                        // },
                     },
                     'sass-loader',
                 ],
@@ -37,7 +45,8 @@ const config = {
         path: OUTPUT_DIR,
         filename: "[name].js"
     },
-    plugins: [new MiniCssExtractPlugin({filename: '[name].css'})],
+    plugins: [new MiniCssExtractPlugin({filename: 'styles.css'})],
+    devtool: "source-map",
 };
 
 module.exports = config;

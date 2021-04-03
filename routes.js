@@ -18,6 +18,10 @@ const RECIPE_DETAIL = "/:id";
 const EDIT_RECIPE =  "/:id/edit";
 const DELETE_RECIPE = "/:id/delete";
 
+// Kakao
+const KAKAO = "/auth/kakao";
+const KAKAO_CALLBACK = "/auth/kakao/callback";
+
 const routes = {
     home: HOME,
     signup: SIGNUP,
@@ -56,7 +60,9 @@ const routes = {
         }else{
             return DELETE_RECIPE;
         }
-    }
+    },
+    kakao: KAKAO,
+    kakaoCallback: KAKAO_CALLBACK
 };
 
 export default routes;
