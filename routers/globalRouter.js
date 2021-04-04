@@ -22,7 +22,7 @@ globalRouter.get(routes.signout, onlyPrivate, signout);
 globalRouter.get(routes.kakao, kakaoSignin);
 globalRouter.get(
     routes.kakaoCallback, 
-    passport.authenticate('kakao', {failureRedirect: '#!/login',}),
+    passport.authenticate('kakao', {failureRedirect: routes.signin,}), // this one is to receive the user from kakao, used as a middleware
     postKakaoSignin
 );
 

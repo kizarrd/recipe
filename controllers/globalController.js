@@ -41,9 +41,41 @@ export const postSignin = passport.authenticate("local", {
     successRedirect: routes.home
 });
 
-export const kakaoSignin = passport.authenticate('kakao', {failureRedirect: '#!/login', });
+export const kakaoSignin = passport.authenticate('kakao', {failureRedirect: routes.signin, }); // this one is to send the user to kakao
 
-export const kakaoSigninCallback = (_, __, profile, done) => {
+export const kakaoSigninCallback = async (_, __, profile, cb) => {
+
+    // console.log(profile);
+
+    const {
+        id,
+        username: name,
+        _json: {
+          kakao_account: { email },
+        },
+      } = profile;
+      try {
+        const user = await User.findOne({ email });
+        if (user) {
+          user.kakaoId = id;
+          user.save();
+          return cb(null, user);
+        } else {
+          const newUser = await User.create({
+            email,
+            name,
+            kakaoId: id
+          });
+          return cb(null, newUser);
+        }
+      } catch (error) {
+        return cb(error); // 여기서 cb함수는 passport에서 제공하는? 함수인데 cb(error)이런 식으로 error를 넣어주면 유저를 못찾았다는 뜻이고. 
+        // 그게 아니라 유저를 찾았을때는 위에처럼 cb(null, newUser)를 해주면 에러가 없고 유저를 찾았다고 passport에 알려주는 것이다.
+        // 이런 경우에 passport는 local strategy처럼 session에 로그인 정보 저장해주고 할거 해준다. 
+      }
+
+
+
     // const { _json: { id, avatarUrl, name, email: } } = profile;
     // console.log(accessToken, refreshToken, profile, done);
     // User.findOne(
@@ -77,7 +109,7 @@ export const kakaoSigninCallback = (_, __, profile, done) => {
 };
 
 export const postKakaoSignin = (req, res) => {
-    res.send(routes.home);
+    res.redirect(routes.home);
 }
 
 export const signout = (req, res) => {
