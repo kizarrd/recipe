@@ -7,7 +7,7 @@ export const localsMiddleWare = (req, res, next) => {
     res.locals.siteName = "RECIPE";
     res.locals.routes = routes;
     console.log(req.user);
-    res.locals.user = req.user || null;
+    res.locals.loggedUser = req.user || null;
     next();
 };
 

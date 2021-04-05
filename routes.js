@@ -10,6 +10,7 @@ const USER = "/user";
 const USER_DETAIL = "/:id";
 const EDIT_PROFILE = "/edit-profile";
 const CHANGE_PASSWORD = "/change-password";
+const ME = "/user/me";
 
 // Recipes
 const RECIPE = "/recipe";
@@ -62,7 +63,8 @@ const routes = {
         }
     },
     kakao: KAKAO,
-    kakaoCallback: KAKAO_CALLBACK
+    kakaoCallback: KAKAO_CALLBACK,
+    me: ME
 };
 
 export default routes;

@@ -1,5 +1,5 @@
 import express from "express";
-import { changePassword, editProfile, userDetail, userHome } from "../controllers/userController";
+import { changePassword, editProfile, userDetail, userHome, myDetail } from "../controllers/userController";
 import { onlyPrivate } from "../middlewares";
 import routes from "../routes";
 
@@ -10,5 +10,6 @@ userRouter.get(routes.home, userHome);
 userRouter.get(routes.changePassword, onlyPrivate, changePassword);
 userRouter.get(routes.editProfile, onlyPrivate, editProfile);
 userRouter.get(routes.userDetail(), userDetail);
+// userRouter.get(routes.me, myDetail);
 
 export default userRouter;

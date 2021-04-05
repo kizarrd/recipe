@@ -1,4 +1,10 @@
 extends layouts/main.pug
 
 block content 
-    p User Detail
+    .user__profile
+        if loggedUser==user
+            h4.username name: #{loggedUser.name} 
+            h4.useremail email: #{loggedUser.email} 
+        else
+            h4.username name: #{user.name} 
+            h4.useremail email: #{user.email} 
